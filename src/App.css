@@ -1,0 +1,25 @@
+/* App.css */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #d8d8de23;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 20px;
+}
+
+.navbar {
+  background-color: #007bff;
+  color: white;
+}
+
+.navbar a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+}
+
+.card {
+  margin-bottom: 20px;
+}
