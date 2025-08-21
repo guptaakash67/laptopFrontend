@@ -20,7 +20,7 @@ const LaptopList = () => {
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/laptops/${id}`
+        `${process.env.REACT_APP_API_URL}api/laptops/${id}`
       );
       if (response.status === 204) {
         setLaptops(laptops.filter((laptop) => laptop._id !== id));
@@ -32,7 +32,7 @@ const LaptopList = () => {
 
   const fetchLaptops = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/laptops");
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}api/laptops`);
       setLaptops(response.data);
     } catch (error) {
       setError(`Error fetching laptops: ${error.message}`);
@@ -67,7 +67,7 @@ const LaptopList = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:5000/api/laptops",
+        `${process.env.REACT_APP_API_URL}api/laptops`,
         laptopData
       );
 
