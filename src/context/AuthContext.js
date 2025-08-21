@@ -3,6 +3,12 @@ import axios from "axios";
 
 const AuthContext = createContext();
 
+// Create a central axios instance with base URL from environment variable
+const API_URL = process.env.REACT_APP_API_URL;
+const api = axios.create({
+  baseURL: API_URL,
+});
+
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
@@ -10,14 +16,10 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+  `${API_URL}/api/auth/login`,
+  { email, password }
+);
 
-      // Assuming the API responds with user data and a token on successful authentication
       if (response.status === 200) {
         setIsAuthenticated(true);
         setUser(response.data.user); // Save user data if needed
@@ -26,7 +28,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       console.error("Login failed", error);
-      throw error; // Rethrow error to handle in LoginPage
+      throw error; // rethrow so LoginPage can handle it
     }
   };
 
